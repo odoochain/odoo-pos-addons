@@ -10,7 +10,7 @@ from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
-PAYMENT_RESULT_NOTIFICATION_URL = "wechat/callback"
+PAYMENT_RESULT_NOTIFICATION_URL = "chain_wechat_base/callback"
 SUCCESS = "SUCCESS"
 
 
@@ -136,7 +136,7 @@ class WeChatOrder(models.Model):
         url = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("wechat.payment_result_notification_url")
+            .get_param("chain_wechat_base.payment_result_notification_url")
         )
         if url:
             return url
@@ -179,7 +179,7 @@ class WeChatOrder(models.Model):
             total_fee = order._total_fee()
         if debug:
             _logger.info(
-                "SANDBOX is activated. Request to wechat servers is not sending"
+                "SANDBOX is activated. Request to chain_wechat_base servers is not sending"
             )
             # Dummy Data. Change it to try different scenarios
             result_json = {
@@ -195,7 +195,7 @@ class WeChatOrder(models.Model):
             wpay = self.env["ir.config_parameter"].get_wechat_pay_object()
             # TODO: we probably have make cr.commit() before making request to
             # be sure that we save data before sending request to avoid
-            # situation when order is sent to wechat server, but was not saved
+            # situation when order is sent to chain_wechat_base server, but was not saved
             # in our server for any reason
             _logger.debug(
                 "Unified order:\n total_fee: %s\n body: %s\n, detail: \n %s",

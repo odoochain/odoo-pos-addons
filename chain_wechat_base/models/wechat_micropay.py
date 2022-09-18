@@ -73,7 +73,7 @@ class Micropay(models.Model):
 
         if debug:
             _logger.info(
-                "SANDBOX is activated. Request to wechat servers are not sending"
+                "SANDBOX is activated. Request to chain_wechat_base servers are not sending"
             )
             # Dummy Data. Change it to try different scenarios
             result_json = {
@@ -89,7 +89,7 @@ class Micropay(models.Model):
             wpay = self.env["ir.config_parameter"].get_wechat_pay_object()
             # TODO: we probably have make cr.commit() before making request to
             # be sure that we save data before sending request to avoid
-            # situation when order is sent to wechat server, but was not saved
+            # situation when order is sent to chain_wechat_base server, but was not saved
             # in our server for any reason
 
             result_json = wpay.micropay.create(

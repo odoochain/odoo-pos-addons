@@ -18,7 +18,7 @@ class WechatController(http.Controller):
     def wechat_callback(self):
         xml_raw = request.httprequest.get_data().decode(request.httprequest.charset)
         _logger.debug(
-            "/wechat/callback request data: %s\nheaders %s: ",
+            "/chain_wechat_base/callback request data: %s\nheaders %s: ",
             xml_raw,
             request.httprequest.headers,
         )

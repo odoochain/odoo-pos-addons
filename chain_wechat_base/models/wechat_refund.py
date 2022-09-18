@@ -53,7 +53,7 @@ class WeChatRefund(models.Model):
         record = self.order_id or self.micropay_id
         if debug:
             _logger.info(
-                "SANDBOX is activated. Request to wechat servers is not sending"
+                "SANDBOX is activated. Request to chain_wechat_base servers is not sending"
             )
             # Dummy Data. Change it to try different scenarios
             if self.env.context.get("debug_wechat_refund_response"):

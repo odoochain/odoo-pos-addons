@@ -53,7 +53,7 @@ class TestWeChatOrder(HttpCase):
             _logger.debug("Request data for %s: %s", url, data)
             return post_result[url]
 
-        # patch wechat
+        # patch chain_wechat_base
         patcher = patch("wechatpy.pay.base.BaseWeChatPayAPI._post", wraps=post)
         patcher.start()
         self.addCleanup(patcher.stop)
