@@ -4,12 +4,13 @@ odoo.define("pos_longpolling.PosConnection", function (require) {
     var LongpollingModel = require("pos_longpolling.LongpollingModel");
     var SyncBusService = require("pos_longpolling.SyncBusService");
     var session = require("web.session");
-    var CrashManager = require("web.CrashManager");
-    var crash_manager = new CrashManager.CrashManager();
+    var { WarningDialog } = require("@web/legacy/js/_deprecated/crash_manager_warning_dialog");
+    // var CrashManager = require("web.CrashManager");
+    // var crash_manager = new CrashManager.CrashManager();
     var core = require("web.core");
     var _t = core._t;
 
-    var PosConnection = core.Class.extend({
+    return core.Class.extend({
         service: "bus_service",
         init: function (options) {
             options = options || {};
@@ -123,20 +124,27 @@ odoo.define("pos_longpolling.PosConnection", function (require) {
                         return callback(message);
                     }
                 } catch (err) {
-                    crash_manager.show_error({
-                        type: _t("Longpolling Handling Error"),
-                        message: _t("Longpolling Handling Error"),
-                        data: {debug: err.stack},
-                    });
+                    // crash_manager.show_error({
+                    //     type: _t("Longpolling Handling Error"),
+                    //     message: _t("Longpolling Handling Error"),
+                    //     data: {debug: err.stack},
+                    // });
+                    new WarningDialog(self, {
+                    title: _t("Longpolling Handling Error"),
+                }, {
+                    message: _t("Longpolling Handling Error")
+                }).open();
                 }
             }
         },
         check_sleep_mode: function () {
             var visibilityChange = "";
             var self = this;
+
             function onVisibilityChange() {
                 self.sleep = true;
             }
+
             if (typeof document.hidden !== "undefined") {
                 visibilityChange = "visibilitychange";
             } else if (typeof document.mozHidden !== "undefined") {
@@ -167,6 +175,4 @@ odoo.define("pos_longpolling.PosConnection", function (require) {
             this.longpolling_connection.trigger("change:poll_connection", is_online);
         },
     });
-
-    return PosConnection;
 });

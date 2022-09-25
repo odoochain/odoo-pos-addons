@@ -12,7 +12,7 @@
     "website": "https://github.com/itpp-labs/pos-addons#readme",
     "license": "Other OSI approved licence",  # MIT
     "depends": [
-        "pos_wechat_base",
+        "chain_wechat_base",
         "pos_qr_scan",
         "pos_qr_show",
         "pos_qr_payments",
