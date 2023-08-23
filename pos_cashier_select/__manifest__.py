@@ -15,8 +15,6 @@
     "support": "apps@itpp.dev",
     "website": "https://github.com/itpp-labs/pos-addons",
     "license": "Other OSI approved licence",  # MIT
-    "price": 20.00,
-    "currency": "EUR",
     "depends": ["point_of_sale"],
     "external_dependencies": {"python": [], "bin": []},
     "data": ["views/views.xml"],

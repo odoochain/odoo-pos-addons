@@ -1,7 +1,7 @@
 {
     "name": """POS: Longpolling support""",
     "summary": """Technical module to implement instant updates in POS""",
-    "category": "Wecom/Point of Sale",
+    "category": "Point of Sale",
     "images": [],
     'version': '1.0.1',
     "application": False,
